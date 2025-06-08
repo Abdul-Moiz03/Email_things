@@ -20,6 +20,8 @@ public class EmailService {
 
     @Value("${email.company}")
     private String companyEmail;
+    @Value("${feedback_url}")
+    private String feadbackurl;
 
     public String sendInitialEmail(UserInput userInput) {
         String feedbackId = UUID.randomUUID().toString();
@@ -48,7 +50,7 @@ public class EmailService {
                                 <p style="margin: 0 0 15px 0; font-size: 18px; color: #333; font-weight: 500;">Dear Mr/Mrs %s,</p>
                                 <p style="margin: 0; font-size: 16px; color: #666; line-height: 1.5;">Thank you for your recent purchase from our store. We hope you're satisfied with your experience.</p>
                             </div>
-                            <form action="http://localhost:8081/api/submit-feedback" method="GET" target="_blank">
+                            <form action="%s" method="GET" target="_blank">
                                <input type="hidden" name="firstName" value="%s">
                                <input type="hidden" name="lastName" value="%s">
                                 <input type="hidden" name="email" value="%s">
@@ -199,7 +201,7 @@ public class EmailService {
                 
                 </body>
                 </html>
-""".formatted(userInput.getFirstName(), userInput.getFirstName(), userInput.getLastName(), userInput.getEmail(), feedbackId);
+""".formatted(userInput.getFirstName(),feadbackurl,userInput.getFirstName(), userInput.getLastName(), userInput.getEmail(), feedbackId);
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
@@ -218,7 +220,7 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(senderEmail);
         message.setTo(companyEmail);
-        message.setSubject("New Feedback Submission - " + feedbackData.getFeedbackId());
+        message.setSubject("New Feedback Submission - " + feedbackData.getFirstName());
         message.setText("""
             New Feedback Received:
             First Name: %s
