@@ -78,7 +78,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-        <mainClass>com.example.email.EmailWorkApplication</mainClass>
+                <mainClass>org.example.FeedbackSystemApplication</mainClass>
 
                 </configuration>
                 <executions>
