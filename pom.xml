@@ -78,6 +78,8 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+        <mainClass>com.example.email.EmailWorkApplication</mainClass>
+
                 </configuration>
             </plugin>
         </plugins>
