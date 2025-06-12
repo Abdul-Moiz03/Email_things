@@ -32,176 +32,79 @@ public class EmailService {
 
 
         String htmlContent = """
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Customer Feedback Form</title>
-                </head>
-                <body style="margin: 0; padding: 20px; font-family: Arial, sans-serif; background-color: #f5f5f5; line-height: 1.6;">
-                    <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
-                          <div style="background: linear-gradient(135deg, #667eea 0%%, #764ba2 100%%); color: white; padding: 30px 20px; text-align: center;">
-                                                    <h1 style="margin: 0; font-size: 28px; font-weight: 600;">Customer Feedback</h1>
-                                                    <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 16px;">We appreciate your business and value your opinion</p>
-                                                </div>
-                        <div style="padding: 40px 30px;">
-                            <div style="margin-bottom: 30px;">
-                                <p style="margin: 0 0 15px 0; font-size: 18px; color: #333; font-weight: 500;">Dear Mr/Mrs %s,</p>
-                                <p style="margin: 0; font-size: 16px; color: #666; line-height: 1.5;">Thank you for your recent purchase from our store. We hope you're satisfied with your experience.</p>
-                            </div>
-                            <form action="%s" method="GET" target="_blank">
-                               <input type="hidden" name="firstName" value="%s">
-                               <input type="hidden" name="lastName" value="%s">
-                                <input type="hidden" name="email" value="%s">
-                                <input type="hidden" name="feedbackId" value="%s">
-                                <div style="margin-bottom: 25px;">
-                                    <h3 style="margin: 0 0 20px 0; font-size: 20px; color: #333; font-weight: 600;">How did we do?</h3>
-                                    <div>
-                                        <label style="display: block; padding: 12px 16px; border: 2px solid #e1e5e9; border-radius: 8px; cursor: pointer; background: #fff; margin-bottom: 12px;">
-                                                          <span style="display: inline-block; vertical-align: middle; margin-right: 15px;">
-                                                            <input type="radio" name="rating" value="5" required>
-                                                          </span>
-                                                          <span style="display: inline-block; vertical-align: middle;">
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 15px;">★</span>
-                                                            <span style="font-size: 16px; color: #333; font-weight: 500;">Excellent</span>
-                                                          </span>
-                                                        </label>
-                
-                                                        <label style="display: block; padding: 12px 16px; border: 2px solid #e1e5e9; border-radius: 8px; cursor: pointer; background: #fff; margin-bottom: 12px;">
-                                                          <span style="display: inline-block; vertical-align: middle; margin-right: 15px;">
-                                                            <input type="radio" name="rating" value="4" required>
-                                                          </span>
-                                                          <span style="display: inline-block; vertical-align: middle;">
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #10b981; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 15px;">★</span>
-                                                            <span style="font-size: 16px; color: #333; font-weight: 500;">Very Good</span>
-                                                          </span>
-                                                        </label>
-                
-                                                        <label style="display: block; padding: 12px 16px; border: 2px solid #e1e5e9; border-radius: 8px; cursor: pointer; background: #fff; margin-bottom: 12px;">
-                                                          <span style="display: inline-block; vertical-align: middle; margin-right: 15px;">
-                                                            <input type="radio" name="rating" value="3" required>
-                                                          </span>
-                                                          <span style="display: inline-block; vertical-align: middle;">
-                                                            <span style="font-size: 24px; color: #fbbf24; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #fbbf24; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #fbbf24; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 15px;">★</span>
-                                                            <span style="font-size: 16px; color: #333; font-weight: 500;">Good</span>
-                                                          </span>
-                                                        </label>
-                
-                                                        <label style="display: block; padding: 12px 16px; border: 2px solid #e1e5e9; border-radius: 8px; cursor: pointer; background: #fff; margin-bottom: 12px;">
-                                                          <span style="display: inline-block; vertical-align: middle; margin-right: 15px;">
-                                                            <input type="radio" name="rating" value="2" required>
-                                                          </span>
-                                                          <span style="display: inline-block; vertical-align: middle;">
-                                                            <span style="font-size: 24px; color: #f97316; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #f97316; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 15px;">★</span>
-                                                            <span style="font-size: 16px; color: #333; font-weight: 500;">Fair</span>
-                                                          </span>
-                                                        </label>
-                
-                                                        <label style="display: block; padding: 12px 16px; border: 2px solid #e1e5e9; border-radius: 8px; cursor: pointer; background: #fff; margin-bottom: 12px;">
-                                                          <span style="display: inline-block; vertical-align: middle; margin-right: 15px;">
-                                                            <input type="radio" name="rating" value="1" required>
-                                                          </span>
-                                                          <span style="display: inline-block; vertical-align: middle;">
-                                                            <span style="font-size: 24px; color: #ef4444; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 4px;">★</span>
-                                                            <span style="font-size: 24px; color: #d1d5db; margin-right: 15px;">★</span>
-                                                            <span style="font-size: 16px; color: #333; font-weight: 500;">Poor</span>
-                                                          </span>
-                                                        </label>
+             <!DOCTYPE html>
+                                <html lang="en">
+                                <head>
+                                  <meta charset="UTF-8">
+                                  <title>Customer Feedback</title>
+                                </head>
+                                <body style="margin:0;padding:20px;font-family:Arial,sans-serif;background-color:#f5f5f5;line-height:1.6;">
+                                  <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #ddd;">
+                                   \s
+                                    <!-- Header -->
+                                    <div style="background-color:#667eea;color:white;padding:30px 20px;text-align:center;">
+                                      <h1 style="margin:0;font-size:28px;font-weight:600;">Customer Feedback</h1>
+                                      <p style="margin:10px 0 0 0;font-size:16px;opacity:0.9;">We appreciate your business and value your opinion</p>
                                     </div>
-                                </div>
-                                <div style="margin-bottom: 25px;">
-                                    <label for="feedback" style="display: block; margin-bottom: 12px; font-weight: 600; color: #333; font-size: 16px;">
-                                        Tell us more about your experience:
-                                    </label>
-                                    <textarea
-                                        id="feedback"
-                                        name="feedback"
-                                        rows="5"
-                                        placeholder="Please share any additional comments, suggestions, or details about your experience with us..."
-                                        style="width: 100%%; padding: 12px 16px; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 16px; resize: vertical; min-height: 120px; box-sizing: border-box; font-family: Arial, sans-serif;"
-                                    ></textarea>
-                                </div>
-                               
-                             <button
-                              type="submit"
-                              style="background: linear-gradient(135deg, #667eea 0%%, #764ba2 100%%); color: white; border: none; padding: 16px 32px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.3s ease;"
-                              >
-                              Submit Feedback
-                              </button>
-                            </form>
-                        </div>
-                        <div style="background: #f8f9fa; padding: 20px 30px; text-align: center; border-top: 1px solid #e1e5e9;">
-                            <p style="margin: 0; color: #666; font-size: 14px;">Your feedback helps us improve our products and services. Thank you for your time!</p>
-                        </div>
-                    </div>
                 
-                    <style>
-                      form:not(:has(input[name="rating"]:checked)) button[type="submit"] {
-                                        pointer-events: none;
-                                        opacity: 0.5;
-                                      }
-                        label:hover {
-                            border-color: #667eea;
-                            background-color: #f8faff;
-                        }
-                        input[type="radio"]:checked + span {
-                            color: #667eea;
-                        }
-                        textarea:focus {
-                            border-color: #667eea;
-                            outline: none;
-                        }
-                        button:hover {
-                            background: #5a67d8;
-                        }
-                         
-                        @media (max-width: 480px) {
-                            body {
-                                padding: 10px;
-                            }
-                            label span {
-                                font-size: 20px;
-                            }
-                            label {
-                                padding: 10px 12px;
-                            }
-                            input, textarea, button {
-                                font-size: 16px;
-                            }
-                        }
-                        @media (max-width: 360px) {
-                            label span {
-                                font-size: 18px;
-                            }
-                            label {
-                                line-height: 1.8;
-                            }
-                        }
-                    </style>
+                                    <!-- Body -->
+                                    <div style="padding:40px 30px;">
+                                      <p style="font-size:18px;color:#333;margin-bottom:10px;font-weight:500;">Dear Mr/Mrs %s,</p>
+                                      <p style="font-size:16px;color:#555;">Thank you for your recent purchase from our store. We hope you're satisfied with your experience.</p>
                 
-                </body>
-                </html>
-""".formatted(userInput.getFirstName(),feadbackurl,userInput.getFirstName(), userInput.getLastName(), userInput.getEmail(), feedbackId);
+                                      <h3 style="margin-top:30px;margin-bottom:20px;font-size:20px;color:#333;font-weight:600;">How did we do?</h3>
+                
+                                      <!-- Rating Buttons -->
+                                      <a href="%s?rating=5&firstName=%s&lastName=%s&email=%s&feedbackId=%s"
+                                         style="display:block;padding:12px 16px;border:2px solid #e1e5e9;border-radius:8px;background:#fff;color:#333;text-decoration:none;margin-bottom:12px;">
+                                        <span style="font-size:24px;color:#10b981;">★★★★★</span>
+                                        <span style="font-size:16px;font-weight:500;margin-left:15px;">Excellent</span>
+                                      </a>
+                
+                                      <a href="%s?rating=4&firstName=%s&lastName=%s&email=%s&feedbackId=%s"
+                                         style="display:block;padding:12px 16px;border:2px solid #e1e5e9;border-radius:8px;background:#fff;color:#333;text-decoration:none;margin-bottom:12px;">
+                                        <span style="font-size:24px;color:#10b981;">★★★★☆</span>
+                                        <span style="font-size:16px;font-weight:500;margin-left:15px;">Very Good</span>
+                                      </a>
+                
+                                      <a href="%s?rating=3&firstName=%s&lastName=%s&email=%s&feedbackId=%s"
+                                         style="display:block;padding:12px 16px;border:2px solid #e1e5e9;border-radius:8px;background:#fff;color:#333;text-decoration:none;margin-bottom:12px;">
+                                        <span style="font-size:24px;color:#fbbf24;">★★★☆☆</span>
+                                        <span style="font-size:16px;font-weight:500;margin-left:15px;">Good</span>
+                                      </a>
+                
+                                      <a href="%s?rating=2&firstName=%s&lastName=%s&email=%s&feedbackId=%s"
+                                         style="display:block;padding:12px 16px;border:2px solid #e1e5e9;border-radius:8px;background:#fff;color:#333;text-decoration:none;margin-bottom:12px;">
+                                        <span style="font-size:24px;color:#f97316;">★★☆☆☆</span>
+                                        <span style="font-size:16px;font-weight:500;margin-left:15px;">Fair</span>
+                                      </a>
+                
+                                      <a href="%s?rating=1&firstName=%s&lastName=%s&email=%s&feedbackId=%s"
+                                         style="display:block;padding:12px 16px;border:2px solid #e1e5e9;border-radius:8px;background:#fff;color:#333;text-decoration:none;margin-bottom:12px;">
+                                        <span style="font-size:24px;color:#ef4444;">★☆☆☆☆</span>
+                                        <span style="font-size:16px;font-weight:500;margin-left:15px;">Poor</span>
+                                      </a>
+                
+                                   </div>
+                
+                                    <!-- Footer -->
+                                    <div style="background:#f8f9fa;padding:20px 30px;text-align:center;border-top:1px solid #e1e5e9;">
+                                      <p style="margin:0;color:#666;font-size:14px;">
+                                        Your feedback helps us improve our products and services. Thank you for your time!
+                                      </p>
+                                    </div>
+                
+                                  </div>
+                                </body>
+                                </html>
+                
+""".formatted(userInput.getFirstName(),
+                feadbackurl,userInput.getFirstName(),userInput.getLastName(),userInput.getEmail(),feedbackId,
+                feadbackurl, userInput.getFirstName(),userInput.getLastName(),userInput.getEmail(),feedbackId,
+                feadbackurl,userInput.getFirstName(),userInput.getLastName(),userInput.getEmail(),feedbackId,
+                feadbackurl,userInput.getFirstName(),userInput.getLastName(),userInput.getEmail(),feedbackId,
+                feadbackurl,userInput.getFirstName(),userInput.getLastName(),userInput.getEmail(),feedbackId
+                );
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
@@ -228,9 +131,8 @@ public class EmailService {
             Email: %s
             Feedback: %s
             Rating: %d stars
-            Feedback ID: %s
             """.formatted(feedbackData.getFirstName(), feedbackData.getLastName(), feedbackData.getEmail(),
-                feedbackData.getFeedback(), feedbackData.getRating(), feedbackData.getFeedbackId()));
+                feedbackData.getFeedback(), feedbackData.getRating()));
 
         try {
             mailSender.send(message);

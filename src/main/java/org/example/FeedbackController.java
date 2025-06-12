@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 import java.util.Map;
 
@@ -62,7 +63,7 @@ public class FeedbackController {
 //
 //    return ResponseEntity.ok("Feedback submitted successfully!");
 //}
-@GetMapping("/submit-feedback")
+@PostMapping("/submit-feedback")
 public String submitFeedback(@ModelAttribute FeedbackData feedbackData) {
     try {
         // Check if both feedback and rating are empty
@@ -80,4 +81,16 @@ public String submitFeedback(@ModelAttribute FeedbackData feedbackData) {
         return "invalid"; // Show invalid.html on error
     }
 }
+ @GetMapping("/submit-feedback-text")
+    public String showFeedbackPage(@RequestParam(value = "rating", required = false) Integer rating,
+                                   Model model) {
+        if (rating == null || rating == 0) {
+            return "invalid"; // Show invalid.html if rating is missing or 0
+        }
+
+        FeedbackData feedbackData = new FeedbackData();
+        feedbackData.setRating(rating); // prefill rating if needed
+        model.addAttribute("feedbackData", feedbackData);
+        return "feedback-form"; // Show the form only if rating is valid
+    }
 }
